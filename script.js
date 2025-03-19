@@ -2,15 +2,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     carregarCarrinho();
     atualizarBotaoComprar();
+
+    // Bloquear números negativos nos campos de número
+    document.getElementById('quantidade').addEventListener('input', bloquearNumerosNegativos);
+    document.getElementById('preço').addEventListener('input', bloquearNumerosNegativos);
 });
+
+// Bloquear números negativos
+function bloquearNumerosNegativos(event) {
+    if (event.target.value < 0) {
+        event.target.value = 0;
+    }
+}
 
 // Adicionar item ao carrinho
 function adicionarAoCarrinho() {
     const produto = document.getElementById('produto').value;
     const quantidade = document.getElementById('quantidade').value;
-    const preco = document.getElementById('preço').value;
+    let preco = document.getElementById('preço').value;
 
     if (produto && quantidade && preco) {
+        preco = parseFloat(preco).toFixed(2); // Formatar preço com duas casas decimais
+
         const item = {
             produto,
             quantidade,
@@ -46,7 +59,7 @@ function adicionarItemAoCarrinho(item) {
     divItem.innerHTML = `
         <p><strong>Produto:</strong> ${item.produto}</p>
         <p><strong>Quantidade:</strong> ${item.quantidade}</p>
-        <p><strong>Preço:</strong> ${item.preco}</p>
+        <p><strong>Preço:</strong> ${item.preco} reais</p>
         <button class="btnExcluir" onclick="excluirItem('${item.produto}')">Excluir</button>
     `;
     carrinho.appendChild(divItem);
