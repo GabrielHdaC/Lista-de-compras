@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validar o preço
     document.getElementById('preço').addEventListener('input', function (e) {
         this.value = this.value.replace(/[^0-9.]/g, '');
+        if ((this.value.match(/\./g) || []).length > 1) {
+            this.value = this.value.slice(0, -1);
+        }
     });
 
     // Easter egg
@@ -23,11 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function adicionarAoCarrinho() {
     const produto = document.getElementById('produto').value;
     const quantidade = document.getElementById('quantidade').value;
-    const descricao = document.getElementById('descrição').value;
+    const descricao = document.getElementById('descrição').value || ''; // Descrição não obrigatória
     let preco = document.getElementById('preço').value;
 
     // Validação de entrada
-    if (produto && quantidade && descricao && preco) {
+    if (produto && quantidade && preco) {
         preco = parseFloat(preco).toFixed(2); // Formatar preço com duas casas decimais
 
         const item = {
@@ -58,7 +61,7 @@ function adicionarAoCarrinho() {
         // Atualizar total do carrinho
         atualizarTotalCarrinho();
     } else {
-        alert('Por favor, preencha todos os campos.');
+        alert('Por favor, preencha todos os campos obrigatórios.');
     }
 }
 

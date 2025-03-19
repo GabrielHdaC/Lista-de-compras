@@ -45,6 +45,15 @@ header {
     color: #333; /* Texto preto */
 }
 
+/* Adicionar sombra aos itens do carrinho */
+.itemCarrinho {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
 .itemCarrinho {
     background: #f9f9f9;
     margin: 10px 0;
@@ -200,6 +209,26 @@ input[type="number"] {
 
 .btnExcluir:hover {
     background-color: #c82333;
+}
+
+/* Adicionar sombra aos botões */
+button {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilizar o botão "Ver itens comprados" */
