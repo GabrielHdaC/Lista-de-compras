@@ -36,11 +36,12 @@
                     </fieldset>
                 </div>
             </div>
-            <div id="Carrinho" class="Carrinho">
-                <h3>Carrinho</h3>
+            <div id="Carrinho" class="Carrinho" role="region" aria-labelledby="carrinhoTitulo">
+                <h3 id="carrinhoTitulo">Carrinho</h3>
                 <div id="conteudoCarrinho">
                     <!-- Conteúdo do carrinho -->
                 </div>
+                <p id="totalCarrinho"><strong>Total:</strong> R$ 0,00</p>
                 <button type="button" class="btnComprar" aria-label="Comprar todos os itens do carrinho" onclick="comprarCarrinho()">Comprar</button>
             </div>
         </div>

@@ -46,6 +46,9 @@ function adicionarAoCarrinho() {
 
         // Atualizar visibilidade do botão "Comprar"
         atualizarBotaoComprar();
+
+        // Atualizar total do carrinho
+        atualizarTotalCarrinho();
     } else {
         alert('Por favor, preencha todos os campos.');
     }
@@ -69,6 +72,7 @@ function adicionarItemAoCarrinho(item) {
 function carregarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.forEach(item => adicionarItemAoCarrinho(item));
+    atualizarTotalCarrinho();
 }
 
 // Comprar todos os itens do carrinho
@@ -88,6 +92,9 @@ function comprarCarrinho() {
 
     // Atualizar visibilidade do botão "Comprar"
     atualizarBotaoComprar();
+
+    // Atualizar total do carrinho
+    atualizarTotalCarrinho();
 }
 
 // Atualizar a visibilidade do botão "Comprar"
@@ -99,6 +106,13 @@ function atualizarBotaoComprar() {
     } else {
         botaoComprar.style.display = 'block';
     }
+}
+
+// Atualizar o total do carrinho
+function atualizarTotalCarrinho() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const total = carrinho.reduce((acc, item) => acc + parseFloat(item.preco) * parseInt(item.quantidade), 0);
+    document.getElementById('totalCarrinho').innerText = `Total: R$ ${total.toFixed(2)}`;
 }
 
 // Excluir item do carrinho
@@ -113,4 +127,7 @@ function excluirItem(produto) {
 
     // Atualizar visibilidade do botão "Comprar"
     atualizarBotaoComprar();
+
+    // Atualizar total do carrinho
+    atualizarTotalCarrinho();
 }
