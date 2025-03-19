@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #333; /* Fundo cinza */
+    color: #fff; /* Texto branco */
 }
 
 header {
@@ -29,6 +30,7 @@ header {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: fit-content; /* Garante que a altura seja ajustada ao conteúdo */
+    color: #333; /* Texto preto */
 }
 
 .Carrinho {
@@ -39,6 +41,7 @@ header {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-left: 20px;
+    color: #333; /* Texto preto */
 }
 
 .itemCarrinho {
@@ -48,6 +51,9 @@ header {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 form {
@@ -103,4 +109,35 @@ input[type="number"]:focus {
 
 .btnAdicionar:hover {
     background-color: #0056b3;
+}
+
+.btnComprar {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btnComprar:hover {
+    background-color: #218838;
+}
+
+.btnExcluir {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btnExcluir:hover {
+    background-color: #c82333;
 }
