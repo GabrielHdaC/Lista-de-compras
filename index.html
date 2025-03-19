@@ -38,16 +38,27 @@
             </div>
             <div id="Carrinho" class="Carrinho" role="region" aria-labelledby="carrinhoTitulo">
                 <h3 id="carrinhoTitulo">Carrinho</h3>
-                <div id="conteudoCarrinho">
+                <div id="conteudoCarrinho" role="list">
                     <!-- Conteúdo do carrinho -->
                 </div>
                 <p id="totalCarrinho"><strong>Total:</strong> R$ 0,00</p>
                 <button type="button" class="btnComprar" aria-label="Comprar todos os itens do carrinho" onclick="comprarCarrinho()">Comprar</button>
+                <button type="button" class="btnComprados" aria-label="Ver itens comprados" onclick="verItensComprados()">Ver itens comprados</button>
             </div>
         </div>
     </main>
     <footer>
     </footer>
     <script src="script.js"></script>
+
+    <template id="itemCarrinhoTemplate">
+        <div class="itemCarrinho">
+            <p><strong>Produto:</strong> <span class="produto"></span></p>
+            <p><strong>Quantidade:</strong> <span class="quantidade"></span></p>
+            <p><strong>Descrição:</strong> <span class="descricao"></span></p>
+            <p><strong>Preço:</strong> <span class="preco"></span> reais</p>
+            <button class="btnExcluir">Excluir</button>
+        </div>
+    </template>
 </body>
 </html>

@@ -1,0 +1,67 @@
+/* Estilizar os itens comprados */
+.itemComprado {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #333; /* Texto preto */
+}
+
+.itemComprado p {
+    margin: 5px 0;
+}
+
+/* Estilizar os botões dentro dos itens comprados */
+.itemComprado .btnExcluir,
+.itemComprado .btnComprarNovamente {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.itemComprado .btnComprarNovamente {
+    background-color: #28a745;
+}
+
+.itemComprado .btnExcluir:hover {
+    background-color: #c82333;
+}
+
+.itemComprado .btnComprarNovamente:hover {
+    background-color: #218838;
+}
+
+/* Estilizar o botão "Limpar lista de itens comprados" */
+.btnLimparComprados {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btnLimparComprados:hover {
+    background-color: #e0a800;
+}
+
+/* Estilizar o botão "Voltar" */
+.btnVoltar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btnVoltar:hover {
+    background-color: #0056b3;
+}

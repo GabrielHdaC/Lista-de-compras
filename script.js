@@ -3,30 +3,30 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarCarrinho();
     atualizarBotaoComprar();
 
-    // Bloquear números negativos nos campos de número
-    document.getElementById('quantidade').addEventListener('input', bloquearNumerosNegativos);
-    document.getElementById('preço').addEventListener('input', bloquearNumerosNegativos);
-});
+    document.getElementById('quantidade').addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
 
-// Bloquear números negativos
-function bloquearNumerosNegativos(event) {
-    if (event.target.value < 0) {
-        event.target.value = 0;
-    }
-}
+    document.getElementById('preço').addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9.]/g, '');
+    });
+});
 
 // Adicionar item ao carrinho
 function adicionarAoCarrinho() {
     const produto = document.getElementById('produto').value;
     const quantidade = document.getElementById('quantidade').value;
+    const descricao = document.getElementById('descrição').value;
     let preco = document.getElementById('preço').value;
 
-    if (produto && quantidade && preco) {
+    if (produto && quantidade && descricao && preco) {
         preco = parseFloat(preco).toFixed(2); // Formatar preço com duas casas decimais
 
         const item = {
+            id: Date.now(), // Usar timestamp como identificador único
             produto,
             quantidade,
+            descricao,
             preco
         };
 
@@ -56,27 +56,36 @@ function adicionarAoCarrinho() {
 
 // Adicionar item ao DOM na seção do carrinho
 function adicionarItemAoCarrinho(item) {
-    const carrinho = document.getElementById('conteudoCarrinho');
+    const conteudoCarrinho = document.getElementById('conteudoCarrinho');
     const divItem = document.createElement('div');
     divItem.className = 'itemCarrinho';
     divItem.innerHTML = `
         <p><strong>Produto:</strong> ${item.produto}</p>
         <p><strong>Quantidade:</strong> ${item.quantidade}</p>
-        <p><strong>Preço:</strong> ${item.preco} reais</p>
-        <button class="btnExcluir" onclick="excluirItem('${item.produto}')">Excluir</button>
+        <p><strong>Descrição:</strong> <span class="descricao">${item.descricao}</span></p>
+        <p><strong>Preço:</strong> <span class="preco">${item.preco}</span> reais</p>
+        <button class="btnExcluir" onclick="excluirItemCarrinho(${item.id})">Excluir</button>
     `;
-    carrinho.appendChild(divItem);
+    conteudoCarrinho.appendChild(divItem);
 }
 
 // Carregar itens do carrinho do localStorage e adicioná-los ao DOM
 function carregarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.forEach(item => adicionarItemAoCarrinho(item));
+    const conteudoCarrinho = document.getElementById('conteudoCarrinho');
+    carrinho.forEach(item => {
+        adicionarItemAoCarrinho(item);
+    });
     atualizarTotalCarrinho();
 }
 
 // Comprar todos os itens do carrinho
 function comprarCarrinho() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    let itensComprados = JSON.parse(localStorage.getItem('itensComprados')) || [];
+    itensComprados = itensComprados.concat(carrinho);
+    localStorage.setItem('itensComprados', JSON.stringify(itensComprados));
+
     // Limpar o carrinho
     localStorage.removeItem('carrinho');
     document.getElementById('conteudoCarrinho').innerHTML = '';
@@ -111,7 +120,7 @@ function atualizarBotaoComprar() {
 // Atualizar o total do carrinho
 function atualizarTotalCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    const total = carrinho.reduce((acc, item) => acc + parseFloat(item.preco) * parseInt(item.quantidade), 0);
+    const total = carrinho.reduce((acc, item) => acc + parseFloat(item.preco), 0);
     document.getElementById('totalCarrinho').innerText = `Total: R$ ${total.toFixed(2)}`;
 }
 
@@ -130,4 +139,16 @@ function excluirItem(produto) {
 
     // Atualizar total do carrinho
     atualizarTotalCarrinho();
+}
+
+function excluirItemCarrinho(id) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho = carrinho.filter(item => item.id !== id);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    document.getElementById('conteudoCarrinho').innerHTML = '';
+    carregarCarrinho();
+}
+
+function verItensComprados() {
+    window.location.href = 'comprado.html';
 }

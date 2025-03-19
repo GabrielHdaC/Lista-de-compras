@@ -34,6 +34,7 @@ header {
 }
 
 .Carrinho {
+    position: relative; /* Adicionado para posicionar o botão dentro da div */
     flex: 1; /* Tamanho dinâmico */
     padding: 20px;
     background: #fff;
@@ -55,6 +56,41 @@ header {
     justify-content: space-between;
     align-items: center;
     animation: fadeIn 0.5s ease-in-out;
+}
+
+.itemCarrinho p {
+    margin: 0 10px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.itemCarrinho .descricao {
+    max-width: 200px; /* Limitar a largura da descrição */
+}
+
+.itemCarrinho .preco {
+    white-space: nowrap;
+}
+
+.itemCarrinho .btnExcluir {
+    margin-left: 10px;
+}
+
+.itemCarrinho p,
+.itemComprado p {
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.itemCarrinho .descricao,
+.itemComprado .descricao {
+    display: block;
+    max-height: 3em; /* Limitar a altura da descrição */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @keyframes fadeIn {
@@ -164,6 +200,23 @@ input[type="number"] {
 
 .btnExcluir:hover {
     background-color: #c82333;
+}
+
+/* Estilizar o botão "Ver itens comprados" */
+.btnComprados {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btnComprados:hover {
+    background-color: #0056b3;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itens Comprados</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="comprado.css">
+</head>
+<body>
+    <header>
+        <section id="titulo">
+            <h1>Itens Comprados</h1>
+        </section>
+    </header>
+    <main>
+        <div class="container">
+            <div id="ItensComprados" class="ItensComprados" role="region" aria-labelledby="compradosTitulo">
+                <h3 id="compradosTitulo">Itens Comprados</h3>
+                <div id="conteudoComprados">
+                    <!-- Conteúdo dos itens comprados -->
+                </div>
+                <button class="btnLimparComprados" onclick="limparItensComprados()">Limpar lista de itens comprados</button>
+                <button class="btnVoltar" onclick="voltar()">Voltar</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarItensComprados();
+        });
+
+        function carregarItensComprados() {
+            const itensComprados = JSON.parse(localStorage.getItem('itensComprados')) || [];
+            const conteudoComprados = document.getElementById('conteudoComprados');
+            itensComprados.forEach(item => {
+                const divItem = document.createElement('div');
+                divItem.className = 'itemComprado';
+                divItem.innerHTML = `
+                    <p><strong>Produto:</strong> ${item.produto}</p>
+                    <p><strong>Quantidade:</strong> ${item.quantidade}</p>
+                    <p><strong>Descrição:</strong> ${item.descricao}</p>
+                    <p><strong>Preço:</strong> ${item.preco} reais</p>
+                    <button class="btnExcluir" onclick="excluirItemComprado(${item.id})">Excluir</button>
+                    <button class="btnComprarNovamente" onclick="comprarNovamente('${item.produto}', ${item.quantidade}, '${item.descricao}', ${item.preco})">Comprar novamente</button>
+                `;
+                conteudoComprados.appendChild(divItem);
+            });
+        }
+
+        function excluirItemComprado(id) {
+            let itensComprados = JSON.parse(localStorage.getItem('itensComprados')) || [];
+            itensComprados = itensComprados.filter(item => item.id !== id);
+            localStorage.setItem('itensComprados', JSON.stringify(itensComprados));
+            location.reload();
+        }
+
+        function comprarNovamente(produto, quantidade, descricao, preco) {
+            const item = { id: Date.now(), produto, quantidade, descricao, preco };
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            carrinho.push(item);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            alert('Item adicionado ao carrinho!');
+        }
+
+        function limparItensComprados() {
+            localStorage.removeItem('itensComprados');
+            location.reload();
+        }
+
+        function voltar() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
