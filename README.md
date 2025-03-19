@@ -7,12 +7,14 @@ Este é um projeto simples de **Lista de Compras** que permite adicionar produto
 - Adicionar produtos ao carrinho com **nome**, **quantidade**, **descrição** e **preço**.
 - Visualizar os produtos adicionados no carrinho.
 - **Persistência** dos dados do carrinho usando `localStorage`, permitindo que os itens permaneçam no carrinho mesmo após recarregar a página.
+- **Remover produtos** do carrinho.
+- **Atualizar a quantidade** de produtos no carrinho.
 
 ## Estrutura do Projeto
 
 - **`index.html`**: O arquivo HTML principal que contém a estrutura da página.
 - **`styles.css`**: O arquivo CSS que contém os estilos para a página.
-- **`script.js`**: O arquivo JavaScript que contém a lógica para adicionar itens ao carrinho e carregar os itens do `localStorage`.
+- **`script.js`**: O arquivo JavaScript que contém a lógica para adicionar, remover e atualizar itens no carrinho e carregar os itens do `localStorage`.
 
 ## Como Usar
 
@@ -21,7 +23,9 @@ Este é um projeto simples de **Lista de Compras** que permite adicionar produto
 3. Preencha os campos do formulário para adicionar um produto ao carrinho.
 4. Clique no botão **"Adicionar ao carrinho"** para adicionar o produto ao carrinho.
 5. Os produtos adicionados aparecerão na seção **"Carrinho"**.
-6. Os itens do carrinho serão salvos no `localStorage` e permanecerão no carrinho mesmo após recarregar a página.
+6. Para remover um produto, clique no botão **"Remover"** ao lado do item no carrinho.
+7. Para atualizar a quantidade de um produto, ajuste o valor no campo de quantidade e clique em **"Atualizar"**.
+8. Os itens do carrinho serão salvos no `localStorage` e permanecerão no carrinho mesmo após recarregar a página.
 
 ## Estrutura do Código
 
@@ -35,10 +39,12 @@ O arquivo `styles.css` contém os estilos para a página, incluindo a formataç�
 
 ### JavaScript
 
-O arquivo `script.js` contém a lógica para adicionar itens ao carrinho e carregar os itens do `localStorage`. As principais funções são:
+O arquivo `script.js` contém a lógica para adicionar, remover e atualizar itens no carrinho e carregar os itens do `localStorage`. As principais funções são:
 
 - **`adicionarAoCarrinho()`**: Adiciona um item ao carrinho e salva no `localStorage`.
 - **`adicionarItemAoCarrinho(item)`**: Adiciona um item ao DOM na seção do carrinho.
+- **`removerDoCarrinho(index)`**: Remove um item do carrinho e atualiza o `localStorage`.
+- **`atualizarQuantidade(index, quantidade)`**: Atualiza a quantidade de um item no carrinho e no `localStorage`.
 - **`carregarCarrinho()`**: Carrega os itens do `localStorage` e os adiciona ao DOM na seção do carrinho.
 
 ---
