@@ -3,14 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarCarrinho();
     atualizarBotaoComprar();
 
+    // Validar a quantidade
     document.getElementById('quantidade').addEventListener('input', function (e) {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 
+    // Validar o preço
     document.getElementById('preço').addEventListener('input', function (e) {
         this.value = this.value.replace(/[^0-9.]/g, '');
     });
 
+    // Easter egg
     document.getElementById('easterEgg').addEventListener('click', () => {
         window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     });
@@ -23,6 +26,7 @@ function adicionarAoCarrinho() {
     const descricao = document.getElementById('descrição').value;
     let preco = document.getElementById('preço').value;
 
+    // Validação de entrada
     if (produto && quantidade && descricao && preco) {
         preco = parseFloat(preco).toFixed(2); // Formatar preço com duas casas decimais
 
@@ -68,7 +72,7 @@ function adicionarItemAoCarrinho(item) {
         <p><strong>Quantidade:</strong> ${item.quantidade}</p>
         <p><strong>Descrição:</strong> <span class="descricao">${item.descricao}</span></p>
         <p><strong>Preço:</strong> <span class="preco">${item.preco}</span> reais</p>
-        <button class="btnExcluir" onclick="excluirItemCarrinho(${item.id})">Excluir</button>
+        <button class="btnExcluir" aria-label="Excluir item do carrinho" onclick="excluirItemCarrinho(${item.id})">Excluir</button>
     `;
     conteudoCarrinho.appendChild(divItem);
 }
@@ -129,22 +133,6 @@ function atualizarTotalCarrinho() {
 }
 
 // Excluir item do carrinho
-function excluirItem(produto) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho = carrinho.filter(item => item.produto !== produto);
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-    // Recarregar o carrinho
-    document.getElementById('conteudoCarrinho').innerHTML = '';
-    carregarCarrinho();
-
-    // Atualizar visibilidade do botão "Comprar"
-    atualizarBotaoComprar();
-
-    // Atualizar total do carrinho
-    atualizarTotalCarrinho();
-}
-
 function excluirItemCarrinho(id) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho = carrinho.filter(item => item.id !== id);
@@ -153,6 +141,7 @@ function excluirItemCarrinho(id) {
     carregarCarrinho();
 }
 
+// Redirecionar para a página de itens comprados
 function verItensComprados() {
     window.location.href = 'comprado.html';
 }
