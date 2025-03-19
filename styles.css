@@ -219,6 +219,17 @@ input[type="number"] {
     background-color: #0056b3;
 }
 
+.easterEgg {
+    cursor: pointer;
+    color: transparent;
+    font-size: 24px;
+    margin-left: 5px;
+}
+
+.easterEgg:hover {
+    color: black;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;

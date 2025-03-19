@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('preço').addEventListener('input', function (e) {
         this.value = this.value.replace(/[^0-9.]/g, '');
     });
+
+    document.getElementById('easterEgg').addEventListener('click', () => {
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    });
 });
 
 // Adicionar item ao carrinho
