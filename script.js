@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('easterEgg').addEventListener('click', () => {
         window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     });
+
+    // Ocultar o botão de comprar inicialmente se o carrinho estiver vazio
+    const conteudoCarrinho = document.getElementById('conteudoCarrinho');
+    if (conteudoCarrinho.children.length === 0) {
+        document.querySelector('.btnComprar').style.display = 'none';
+    }
 });
 
 // Adicionar item ao carrinho
@@ -60,6 +66,9 @@ function adicionarAoCarrinho() {
 
         // Atualizar total do carrinho
         atualizarTotalCarrinho();
+
+        // Show the buy button when an item is added
+        document.querySelector('.btnComprar').style.display = 'block';
     } else {
         alert('Por favor, preencha todos os campos obrigatórios.');
     }
@@ -148,3 +157,22 @@ function excluirItemCarrinho(id) {
 function verItensComprados() {
     window.location.href = 'comprado.html';
 }
+
+// Excluir item do carrinho ao clicar no botão de excluir
+function excluirItemDoCarrinho(event) {
+    const item = event.target.closest('.itemCarrinho');
+    item.remove();
+
+    // Check if the cart is empty and hide the buy button if it is
+    const conteudoCarrinho = document.getElementById('conteudoCarrinho');
+    if (conteudoCarrinho.children.length === 0) {
+        document.querySelector('.btnComprar').style.display = 'none';
+    }
+}
+
+// Add event listener to handle item deletion
+document.getElementById('conteudoCarrinho').addEventListener('click', function(event) {
+    if (event.target.classList.contains('btnExcluir')) {
+        excluirItemDoCarrinho(event);
+    }
+});
